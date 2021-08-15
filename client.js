@@ -1,4 +1,5 @@
 const net = require('net');
+const { IP, PORT, name } = require('./constants');
 
 // "Move: up" - move up one square (unless facing down)
 // "Move: down" - move down one square (unless facing up)
@@ -7,15 +8,15 @@ const net = require('net');
 
 const connect = function() {
   const conn = net.createConnection({ 
-    host: 'localhost',
-    port: 50541
+    host: IP,
+    port: PORT
   });
   // interpret incoming data as text
   conn.setEncoding('utf8');
 
   conn.on('connect', function() {
     console.log('Successfully connected to game server');
-    conn.write('Name: MWS');
+    conn.write(name);
     // setInterval(() => conn.write('Move: up'), 50);
   });
 
